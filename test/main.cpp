@@ -1,8 +1,10 @@
 #include "../src/engine.h"
-#include <iostream>
 
-void OnRedraw() {
-	
+MoldEngine::Sprite sprite("gameFiles/texture.png",{0,0},{32,32});
+
+void OnRedraw(MoldEngine::Engine* engine,float deltaTime) {
+	engine->DrawText("Hello!",{100,100});
+	sprite.Draw(engine->GetWindow());
 }
 
 void OnClose() {
@@ -10,7 +12,7 @@ void OnClose() {
 }
 
 int main() {
-	MoldEngine engine(800,600);
+	MoldEngine::Engine engine(800,600);
 	engine.Run(OnRedraw,OnClose);
 	return 0;
 }
