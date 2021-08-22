@@ -83,7 +83,10 @@ Sprite::Sprite(const char* texturePath,Point offset,Point size) {
     InternalSprite.move(0,0);
 }
 
-void Sprite::Draw(EngineWindow* window) {
-    InternalSprite.setPosition(Position.X,Position.Y);
+void Sprite::Draw(EngineWindow* window,GlideStyle style) {
+    if(style == GlideStyle::Imediate)
+        InternalSprite.setPosition(Position.X,Position.Y);
+    else
+        InternalSprite.move(Position.X,Position.Y);
     window->draw(InternalSprite);
 }

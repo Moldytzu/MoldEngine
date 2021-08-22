@@ -18,9 +18,14 @@ namespace MoldEngine {
             sf::Texture Texture;
             sf::Sprite InternalSprite;
         public:
+            enum GlideStyle {
+                Imediate = 0,
+                Smooth = 1,
+            };
+
             Point Position;
             Sprite(const char* texturePath,Point offset,Point size);
-            void Draw(EngineWindow* window);
+            void Draw(EngineWindow* window,GlideStyle style);
     };
 
     class Engine {
