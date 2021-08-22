@@ -84,5 +84,6 @@ Sprite::Sprite(const char* texturePath,Point offset,Point size) {
 }
 
 void Sprite::Draw(EngineWindow* window) {
+    InternalSprite.setPosition(Position.X,Position.Y);
     window->draw(InternalSprite);
 }

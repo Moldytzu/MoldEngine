@@ -9,16 +9,16 @@ typedef sf::Keyboard::Key Key;
 
 namespace MoldEngine {
     struct Point {
-        int X;
-        int Y;
+        float X;
+        float Y;
     };
 
     class Sprite {
         private:
             sf::Texture Texture;
             sf::Sprite InternalSprite;
-            Point Position;
         public:
+            Point Position;
             Sprite(const char* texturePath,Point offset,Point size);
             void Draw(EngineWindow* window);
     };

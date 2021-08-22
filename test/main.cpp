@@ -1,11 +1,19 @@
 #include "../src/engine.h"
+#define SpriteSpeed 500
 
 MoldEngine::Sprite sprite("gameFiles/texture.png",{0,0},{32,32});
 
 void OnRedraw(MoldEngine::Engine* engine,float deltaTime) {
 	engine->DrawText("Hello!",{100,100});
+	sprite.Draw(engine->GetWindow());
 	if(engine->isKeyDown(Key::A))
-		sprite.Draw(engine->GetWindow());
+		sprite.Position.X -= SpriteSpeed*deltaTime;
+	if(engine->isKeyDown(Key::D))
+		sprite.Position.X += SpriteSpeed*deltaTime;
+	if(engine->isKeyDown(Key::W))
+		sprite.Position.Y -= SpriteSpeed*deltaTime;
+	if(engine->isKeyDown(Key::S))
+		sprite.Position.Y += SpriteSpeed*deltaTime;
 }
 
 void OnClose() {
