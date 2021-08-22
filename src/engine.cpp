@@ -58,6 +58,10 @@ void Engine::SetCursorPos(Point point) {
     Cursor = point;
 }
 
+bool Engine::isKeyDown(Key key) {
+    return sf::Keyboard::isKeyPressed(key);
+}
+
 EngineWindow* Engine::GetWindow() {
     return &Window;
 }

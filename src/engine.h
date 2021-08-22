@@ -5,6 +5,7 @@
 #include <cstring>
 
 typedef sf::RenderWindow EngineWindow;
+typedef sf::Keyboard::Key Key;
 
 namespace MoldEngine {
     struct Point {
@@ -34,6 +35,7 @@ namespace MoldEngine {
         void DrawText(const char* text);
         void DrawText(const char* text,Point point);
         void SetCursorPos(Point point);
+        bool isKeyDown(Key key);
         EngineWindow* GetWindow();
     };
 }

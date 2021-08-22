@@ -4,7 +4,8 @@ MoldEngine::Sprite sprite("gameFiles/texture.png",{0,0},{32,32});
 
 void OnRedraw(MoldEngine::Engine* engine,float deltaTime) {
 	engine->DrawText("Hello!",{100,100});
-	sprite.Draw(engine->GetWindow());
+	if(engine->isKeyDown(Key::A))
+		sprite.Draw(engine->GetWindow());
 }
 
 void OnClose() {
