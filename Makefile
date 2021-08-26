@@ -18,5 +18,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@ mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-build: $(OBJS)
+clean:
+	@ rm -rf $(OBJDIR)
+
+build: clean $(OBJS)
 	$(AR) -rsv $(OUTFILE) $(OBJS)

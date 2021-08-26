@@ -17,7 +17,7 @@ void OnRedraw(MoldEngine::Renderer* engine,float deltaTime) {
 }
 
 void OnClose() {
-	std::cout << "Goodbye!" << std::endl; 
+	MoldEngine::Logging::Info("Bye!");
 }
 
 int main() {

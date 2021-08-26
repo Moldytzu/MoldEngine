@@ -1,13 +1,14 @@
 #pragma once
-#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <cstring>
+#include "Colors.h"
 
 typedef sf::RenderWindow EngineWindow;
 typedef sf::Keyboard::Key Key;
 
 namespace MoldEngine {
+
     struct Point {
         float X;
         float Y;
@@ -42,5 +43,11 @@ namespace MoldEngine {
         void SetCursorPos(Point point);
         bool isKeyDown(Key key);
         EngineWindow* GetWindow();
+    };
+
+    namespace Logging {
+        void Info(const char* message);
+        void Warn(const char* message);
+        void Error(const char* message);
     };
 }

@@ -8,7 +8,7 @@ Renderer::Renderer(int Width,int Height) {
     new (&Window) sf::RenderWindow(sf::VideoMode(Width, Height), "MoldEngine");
     
     if(!Font.loadFromFile("gameFiles/engine/font.ttf")) {
-        std::cout << "Failed to load font!" << std::endl;
+        Logging::Error("Failed to load font!");
         exit(-1);
     }
 
