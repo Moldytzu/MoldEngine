@@ -28,15 +28,15 @@ namespace MoldEngine {
             void Draw(EngineWindow* window,GlideStyle style);
     };
 
-    class Engine {
+    class Renderer {
     private:
         sf::Font Font;
         sf::Text Text;
         Point Cursor;
         EngineWindow Window;
     public:
-        Engine(int Width, int Height);
-        void Run(void(*OnRedraw)(Engine*,float),void(*OnClose)());
+        Renderer(int Width, int Height);
+        void Run(void(*OnRedraw)(Renderer*,float),void(*OnClose)());
         void DrawText(const char* text);
         void DrawText(const char* text,Point point);
         void SetCursorPos(Point point);

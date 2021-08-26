@@ -9,10 +9,14 @@ SRCDIR := src
 OBJDIR := bin/obj
 
 SRC = $(call rwildcard,$(SRCDIR),*.cpp)
+OBJS = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
 DIRS = $(wildcard $(SRCDIR)/*)
 
 OUTFILE = bin/moldengine.a
 
-build:
-	$(CC) $(CFLAGS) $(SRC) -c -o engine.o 
-	$(AR) -rsv $(OUTFILE) engine.o
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	@ mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+build: $(OBJS)
+	$(AR) -rsv $(OUTFILE) $(OBJS)

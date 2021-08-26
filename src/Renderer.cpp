@@ -1,10 +1,10 @@
-#include "engine.h"
+#include "Engine.h"
 
 using namespace MoldEngine;
 
 //Engine
 
-Engine::Engine(int Width,int Height) {
+Renderer::Renderer(int Width,int Height) {
     new (&Window) sf::RenderWindow(sf::VideoMode(Width, Height), "MoldEngine");
     
     if(!Font.loadFromFile("gameFiles/engine/font.ttf")) {
@@ -17,7 +17,7 @@ Engine::Engine(int Width,int Height) {
     Text.setFillColor(sf::Color::White);
 }
 
-void Engine::Run(void(*OnRedraw)(Engine*,float),void(*OnClose)()) {
+void Renderer::Run(void(*OnRedraw)(Renderer*,float),void(*OnClose)()) {
     sf::Clock deltaClock;
     float dt = 0;
     while(Window.isOpen()) {
@@ -39,7 +39,7 @@ void Engine::Run(void(*OnRedraw)(Engine*,float),void(*OnClose)()) {
     }
 }
 
-void Engine::DrawText(const char* text) {
+void Renderer::DrawText(const char* text) {
     Text.setString(text);
     Text.setPosition(Cursor.X,Cursor.Y);
     sf::Vector2f vector = Text.getPosition();
@@ -48,45 +48,20 @@ void Engine::DrawText(const char* text) {
     Window.draw(Text);
 }
 
-void Engine::DrawText(const char* text,Point point) {
+void Renderer::DrawText(const char* text,Point point) {
     Text.setString(text);
     Text.setPosition(point.X,point.Y);
     Window.draw(Text);
 }
 
-void Engine::SetCursorPos(Point point) {
+void Renderer::SetCursorPos(Point point) {
     Cursor = point;
 }
 
-bool Engine::isKeyDown(Key key) {
+bool Renderer::isKeyDown(Key key) {
     return sf::Keyboard::isKeyPressed(key);
 }
 
-EngineWindow* Engine::GetWindow() {
+EngineWindow* Renderer::GetWindow() {
     return &Window;
-}
-
-// Sprite
-
-Sprite::Sprite(const char* texturePath,Point offset,Point size) {
-    sf::IntRect rect;
-    rect.left = offset.X;
-    rect.top = offset.Y;
-    rect.height = size.Y;
-    rect.width = size.X;
-    if(!Texture.loadFromFile(texturePath,rect)) {
-        exit(-1);
-    }
-    Texture.setSmooth(true);
-    
-    InternalSprite.setTexture(Texture,true);
-    InternalSprite.move(0,0);
-}
-
-void Sprite::Draw(EngineWindow* window,GlideStyle style) {
-    if(style == GlideStyle::Imediate)
-        InternalSprite.setPosition(Position.X,Position.Y);
-    else
-        InternalSprite.move(Position.X,Position.Y);
-    window->draw(InternalSprite);
 }
