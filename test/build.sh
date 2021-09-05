@@ -1,1 +1,1 @@
-g++ main.cpp ../bin/moldengine.a -o game -lsfml-graphics -lsfml-window -lsfml-system
+g++ -std=c++17 main.cpp ../bin/moldengine.a -o game -lsfml-window -lsfml-system  -lsfml-graphics

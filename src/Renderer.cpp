@@ -2,7 +2,7 @@
 
 using namespace MoldEngine;
 
-//Engine
+//Renderer
 
 Renderer::Renderer(int Width,int Height) {
     new (&Window) sf::RenderWindow(sf::VideoMode(Width, Height), "MoldEngine");
@@ -15,6 +15,10 @@ Renderer::Renderer(int Width,int Height) {
     Text.setFont(Font);
     Text.setCharacterSize(24);
     Text.setFillColor(sf::Color::White);
+    Window.setFramerateLimit(1024);
+    Window.setMouseCursorVisible(false);
+    Window.setKeyRepeatEnabled(true);
+    WindowFocus = true;
 }
 
 void Renderer::Run(void(*OnRedraw)(Renderer*,float),void(*OnClose)()) {
@@ -24,9 +28,20 @@ void Renderer::Run(void(*OnRedraw)(Renderer*,float),void(*OnClose)()) {
         sf::Event event;
         while (Window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed) {
+            switch (event.type)
+            {
+            case sf::Event::Closed:
                 Window.close();
                 OnClose();
+                break;
+            case sf::Event::GainedFocus:
+                WindowFocus = true;
+                break;
+            case sf::Event::LostFocus:
+                WindowFocus = false;
+                break;
+            default:
+                break;
             }
         }
 
@@ -35,6 +50,10 @@ void Renderer::Run(void(*OnRedraw)(Renderer*,float),void(*OnClose)()) {
         Window.clear();
         OnRedraw(this,dt);
         Window.display();
+        sf::String title = "MoldEngine : ";
+        sf::String title2 = Tools::toString((int)(1000/(dt*1000)));
+        sf::String title3 = " FPS";
+        Window.setTitle(title+title2+title3);
         dt = deltaClock.restart().asSeconds();
     }
 }
@@ -56,10 +75,6 @@ void Renderer::DrawText(const char* text,Point point) {
 
 void Renderer::SetCursorPos(Point point) {
     Cursor = point;
-}
-
-bool Renderer::isKeyDown(Key key) {
-    return sf::Keyboard::isKeyPressed(key);
 }
 
 EngineWindow* Renderer::GetWindow() {

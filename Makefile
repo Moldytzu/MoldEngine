@@ -1,7 +1,7 @@
 rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
 
 CC = g++
-CFLAGS = -O3
+CFLAGS = -O3 -std=c++17
 
 AR = ar
 
@@ -21,5 +21,5 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 clean:
 	@ rm -rf $(OBJDIR)
 
-build: clean $(OBJS)
+build: $(OBJS)
 	$(AR) -rsv $(OUTFILE) $(OBJS)
