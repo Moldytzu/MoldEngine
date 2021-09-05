@@ -10,6 +10,7 @@ typedef sf::Keyboard::Key Key;
 namespace MoldEngine {
 
     inline bool WindowFocus = false; //Is the window in focus?
+    inline EngineWindow GlobalWindow; //Global engine window
 
     struct Point {
         float X;
@@ -28,7 +29,7 @@ namespace MoldEngine {
 
             Point Position; //Current position
             Sprite(const char* texturePath,Point offset,Point size); //Define texture, offset in texture, size to get from the texture
-            void Draw(EngineWindow* window,GlideStyle style); //Draw the sprite on the window
+            void Draw(GlideStyle style); //Draw the sprite on the window
     };
 
     class Renderer {
@@ -36,14 +37,12 @@ namespace MoldEngine {
         sf::Font Font;
         sf::Text Text;
         Point Cursor;
-        EngineWindow Window;
     public:
         Renderer(int Width, int Height);
         void Run(void(*OnRedraw)(Renderer*,float),void(*OnClose)()); //Run the game
         void DrawText(const char* text); //Draw text onto the screen at the cursor position
         void DrawText(const char* text,Point point); //Draw text at a position onto the screen
         void SetCursorPos(Point point); //Set the cursor position
-        EngineWindow* GetWindow(); //Get the window
     };
 
     namespace Input {
@@ -54,7 +53,7 @@ namespace MoldEngine {
         };
 
         bool isKeyDown(Key key); //Check if key is down
-        MouseState getMouseState(EngineWindow* window); //Get mouse state on the window
+        MouseState getMouseState(); //Get mouse state on the window
     };
 
     namespace Logging {
