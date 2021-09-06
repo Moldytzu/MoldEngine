@@ -29,9 +29,12 @@ Renderer::Renderer(int Width,int Height,int antialiasingLevel) {
 
     new (&GlobalWindow) sf::RenderWindow(sf::VideoMode(Width, Height), "MoldEngine", sf::Style::Default, settings);
 
-    GlobalWindow.setFramerateLimit(1024);
+    GlobalWindow.setFramerateLimit(120);
     GlobalWindow.setMouseCursorVisible(false);
     GlobalWindow.setKeyRepeatEnabled(true);
+
+    GlobalViewport = GlobalWindow.getDefaultView();
+
     WindowFocus = true;
 }
 

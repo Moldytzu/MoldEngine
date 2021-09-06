@@ -27,6 +27,9 @@ void OnClose() {
 
 int main() {
 	MoldEngine::Renderer renderer(800,600,0);
+	MoldEngine::Camera::setZoom(1);
+	MoldEngine::Camera::setRotation(180);
+	MoldEngine::Camera::setOffset({10,10});
 	renderer.Run(OnRedraw,OnClose);
 	return 0;
 }

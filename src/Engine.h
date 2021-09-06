@@ -6,11 +6,13 @@
 
 typedef sf::RenderWindow EngineWindow;
 typedef sf::Keyboard::Key Key;
+typedef sf::View Viewport;
 
 namespace MoldEngine {
 
     inline bool WindowFocus = false; //Is the window in focus?
     inline EngineWindow GlobalWindow; //Global engine window
+    inline Viewport GlobalViewport; //Global viewport
 
     struct Point {
         float X;
@@ -66,4 +68,11 @@ namespace MoldEngine {
         const char* toString(int num); //Convert an integer to a C-string
         const char* toString(float num); //Convert a floating point number to a C-string
     };
+
+    namespace Camera {
+        void setZoom(float level); //set zoom level
+        void setOffset(Point offset); //set the offset
+        void setRotation(float rotation); //set rotation
+    };
+
 }
