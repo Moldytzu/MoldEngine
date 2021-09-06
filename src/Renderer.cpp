@@ -5,6 +5,7 @@ using namespace MoldEngine;
 //Renderer
 
 Renderer::Renderer(int Width,int Height,int antialiasingLevel) {
+    Logging::Info("Starting MoldEngine");
     if(!Font.loadFromMemory(Data::getFileFromData("engine/font.ttf"),Data::getFileSize("engine/font.ttf"))) {
         Logging::Error("Failed to load font!");
         exit(-1);
@@ -35,6 +36,8 @@ Renderer::Renderer(int Width,int Height,int antialiasingLevel) {
     GlobalViewport = GlobalWindow.getDefaultView();
 
     WindowFocus = true;
+    CurrentColor = COLOR_WHITE;
+    Logging::Info("MoldEngine by Moldytzu");
 }
 
 void Renderer::Run(void(*OnRedraw)(Renderer*,float),void(*OnClose)()) {
@@ -76,6 +79,7 @@ void Renderer::Run(void(*OnRedraw)(Renderer*,float),void(*OnClose)()) {
 
 void Renderer::DrawText(const char* text) {
     Text.setString(text);
+    Text.setFillColor({CurrentColor.R,CurrentColor.G,CurrentColor.B,255});
     Text.setPosition(Cursor.X,Cursor.Y);
     sf::Vector2f vector = Text.getPosition();
     Cursor.X = vector.x+Text.getGlobalBounds().width+3;
@@ -85,10 +89,7 @@ void Renderer::DrawText(const char* text) {
 
 void Renderer::DrawText(const char* text,Point point) {
     Text.setString(text);
+    Text.setFillColor({CurrentColor.R,CurrentColor.G,CurrentColor.B,255});
     Text.setPosition(point.X,point.Y);
     GlobalWindow.draw(Text);
-}
-
-void Renderer::SetCursorPos(Point point) {
-    Cursor = point;
 }

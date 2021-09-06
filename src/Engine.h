@@ -20,6 +20,12 @@ namespace MoldEngine {
         float Y;
     };
 
+    struct Color {
+        uint8_t R;
+        uint8_t G;
+        uint8_t B;
+    };
+
     class Sprite {
         private:
             sf::Texture Texture;
@@ -39,13 +45,13 @@ namespace MoldEngine {
     private:
         sf::Font Font;
         sf::Text Text;
-        Point Cursor;
     public:
+        Color CurrentColor;
+        Point Cursor;
         Renderer(int Width, int Height, int antialiasingLevel);
         void Run(void(*OnRedraw)(Renderer*,float),void(*OnClose)()); //Run the game
         void DrawText(const char* text); //Draw text onto the screen at the cursor position
         void DrawText(const char* text,Point point); //Draw text at a position onto the screen
-        void SetCursorPos(Point point); //Set the cursor position
     };
 
     namespace Input {

@@ -4,6 +4,7 @@
 MoldEngine::Sprite sprite("texture.png",{0,0},{32,32});
 
 void OnRedraw(MoldEngine::Renderer* renderer,float deltaTime) {
+	renderer->CurrentColor = COLOR_YELLOW;
 	renderer->DrawText("Hello!");
 	sprite.Draw(MoldEngine::Sprite::GlideStyle::Smooth);
 	MoldEngine::Input::MouseState mouseState = MoldEngine::Input::getMouseState();
@@ -15,10 +16,13 @@ void OnRedraw(MoldEngine::Renderer* renderer,float deltaTime) {
 		sprite.Position.Y -= SpriteSpeed*deltaTime;
 	if(MoldEngine::Input::isKeyDown(Key::S))
 		sprite.Position.Y += SpriteSpeed*deltaTime;
-	if(mouseState.LMB)
+	if(mouseState.LMB) {
+		renderer->CurrentColor = COLOR_RED;
 		renderer->DrawText("LMB",mouseState.position);
-	else if(mouseState.RMB)
+	} else if(mouseState.RMB) {
+		renderer->CurrentColor = COLOR_GREEN;
 		renderer->DrawText("RMB",mouseState.position);
+	}	
 }
 
 void OnClose() {
@@ -27,9 +31,6 @@ void OnClose() {
 
 int main() {
 	MoldEngine::Renderer renderer(800,600,0);
-	MoldEngine::Camera::setZoom(1);
-	MoldEngine::Camera::setRotation(180);
-	MoldEngine::Camera::setOffset({10,10});
 	renderer.Run(OnRedraw,OnClose);
 	return 0;
 }
