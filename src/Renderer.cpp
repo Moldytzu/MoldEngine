@@ -5,8 +5,7 @@ using namespace MoldEngine;
 //Renderer
 
 Renderer::Renderer(int Width,int Height,int antialiasingLevel) {
-    
-    if(!Font.loadFromFile("gameFiles/engine/font.ttf")) {
+    if(!Font.loadFromMemory(Data::getFileFromData("engine/font.ttf"),Data::getFileSize("engine/font.ttf"))) {
         Logging::Error("Failed to load font!");
         exit(-1);
     }

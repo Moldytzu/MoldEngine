@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <physfs.h>
 #include <cstring>
 #include "Colors.h"
 
@@ -75,4 +76,8 @@ namespace MoldEngine {
         void setRotation(float rotation); //set rotation
     };
 
+    namespace Data {
+        void* getFileFromData(const char* filename); //read file from data file
+        int getFileSize(const char* filename); //get file size
+    };
 }

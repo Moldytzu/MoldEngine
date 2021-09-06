@@ -1,7 +1,7 @@
 #include "../src/Engine.h"
 #define SpriteSpeed 5
 
-MoldEngine::Sprite sprite("gameFiles/texture.png",{0,0},{32,32});
+MoldEngine::Sprite sprite("texture.png",{0,0},{32,32});
 
 void OnRedraw(MoldEngine::Renderer* renderer,float deltaTime) {
 	renderer->DrawText("Hello!");

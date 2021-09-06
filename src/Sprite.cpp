@@ -8,7 +8,9 @@ Sprite::Sprite(const char* texturePath,Point offset,Point size) {
     rect.top = offset.Y;
     rect.height = size.Y;
     rect.width = size.X;
-    if(!Texture.loadFromFile(texturePath,rect)) {
+    //loadFromMemory(Data::getFileFromData("engine/font.ttf"),Data::getFileSize("engine/font.ttf"))
+    //if(!Texture.loadFromFile(texturePath,rect)) {
+    if(!Texture.loadFromMemory(Data::getFileFromData(texturePath),Data::getFileSize(texturePath),rect)) {
         exit(-1);
     }
     Texture.setSmooth(true);
