@@ -1,2 +1,2 @@
 # MoldEngine
-A game engine made with SDL and you guessed it, mold.
+A game engine made with SFML and you guessed it, mold.
