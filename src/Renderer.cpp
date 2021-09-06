@@ -4,8 +4,7 @@ using namespace MoldEngine;
 
 //Renderer
 
-Renderer::Renderer(int Width,int Height) {
-    new (&GlobalWindow) sf::RenderWindow(sf::VideoMode(Width, Height), "MoldEngine");
+Renderer::Renderer(int Width,int Height,int antialiasingLevel) {
     
     if(!Font.loadFromFile("gameFiles/engine/font.ttf")) {
         Logging::Error("Failed to load font!");
@@ -15,6 +14,21 @@ Renderer::Renderer(int Width,int Height) {
     Text.setFont(Font);
     Text.setCharacterSize(24);
     Text.setFillColor(sf::Color::White);
+
+    if(antialiasingLevel < 0 || antialiasingLevel > 4) {
+        Logging::Error("Antialiasing level is too high or too low!");
+        exit(-1);
+    }
+
+    sf::ContextSettings settings;
+    settings.depthBits = 24;
+    settings.stencilBits = 8;
+    settings.antialiasingLevel = antialiasingLevel;
+    settings.majorVersion = 2;
+    settings.minorVersion = 1;
+
+    new (&GlobalWindow) sf::RenderWindow(sf::VideoMode(Width, Height), "MoldEngine", sf::Style::Default, settings);
+
     GlobalWindow.setFramerateLimit(1024);
     GlobalWindow.setMouseCursorVisible(false);
     GlobalWindow.setKeyRepeatEnabled(true);

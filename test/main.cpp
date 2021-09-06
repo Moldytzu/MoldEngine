@@ -26,7 +26,7 @@ void OnClose() {
 }
 
 int main() {
-	MoldEngine::Renderer renderer(800,600);
+	MoldEngine::Renderer renderer(800,600,0);
 	renderer.Run(OnRedraw,OnClose);
 	return 0;
 }

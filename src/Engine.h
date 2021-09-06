@@ -38,7 +38,7 @@ namespace MoldEngine {
         sf::Text Text;
         Point Cursor;
     public:
-        Renderer(int Width, int Height);
+        Renderer(int Width, int Height, int antialiasingLevel);
         void Run(void(*OnRedraw)(Renderer*,float),void(*OnClose)()); //Run the game
         void DrawText(const char* text); //Draw text onto the screen at the cursor position
         void DrawText(const char* text,Point point); //Draw text at a position onto the screen
